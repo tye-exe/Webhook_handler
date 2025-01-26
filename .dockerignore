@@ -1,0 +1,8 @@
+target
+.cargo
+**/*.sh
+**/*.tar.gz
+
+.direnv
+.envrc
+.env

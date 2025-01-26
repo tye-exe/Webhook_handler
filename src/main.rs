@@ -122,13 +122,14 @@ impl<'a> FromRequest<'a> for XHubSignature<'a> {
 
 #[launch]
 fn launch() -> _ {
+    // This way still allows for customistion via ENV.
+    let config = Config::figment().merge((
+        Config::LIMITS,
+        Limits::new().limit("string", 32.kibibytes()),
+    ));
+
     rocket::build()
-        .configure(Config {
-            address: std::net::IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0)),
-            port: 2222,
-            limits: { Limits::new().limit("string", 32.kibibytes()) },
-            ..Default::default()
-        })
+        .configure(config)
         .mount("/", routes![listen, webhook_listen])
 }
 

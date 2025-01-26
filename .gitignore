@@ -4,6 +4,11 @@
 .envrc
 
 # Script file
-script.sh
+script
 # Cloned website files
 source
+# Website testing
+website
+
+# Enviroment Vars
+.env

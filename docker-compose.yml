@@ -1,0 +1,24 @@
+services:
+  webhook_handler:
+    build:
+      context: .
+      tags:
+        - "webhook_handler:latest"
+    container_name: webhook_handler
+    volumes:
+      - ./source:/webhook/source
+      - ./script:/webhook/script
+      - ./website:/webhook/website
+    restart: unless-stopped
+    networks:
+      - proxy-network
+    environment:
+    - WEBHOOK_SECRET=${WEBHOOK_SECRET}
+    - WEBHOOK_SCRIPT=/webhook/script/script.sh
+    - WEBHOOK_SOURCE=/webhook/source
+    - WEBHOOK_WEBSITE=/webhook/website
+
+networks:
+  proxy-network:
+    name: proxy-network
+    external: true
