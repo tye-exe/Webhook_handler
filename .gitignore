@@ -1,0 +1,9 @@
+/target
+
+.direnv
+.envrc
+
+# Script file
+script.sh
+# Cloned website files
+source
